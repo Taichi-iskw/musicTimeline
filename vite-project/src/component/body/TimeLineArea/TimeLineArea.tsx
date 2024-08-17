@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import Years from "./years/years"
+import Years from "./years"
+import AlbumTimeLine from "./AlubumTimeLine"
 
 const StyledContaienr = styled.div`
     display: flex;
@@ -10,7 +11,7 @@ const TimeLineArea =()=>{
     return(
     <StyledContaienr>
         <Years></Years>
-        <></>{/* show album images at here */}
+        <AlbumTimeLine></AlbumTimeLine>
     </StyledContaienr>
     )
 }
