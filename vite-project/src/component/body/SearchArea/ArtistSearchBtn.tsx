@@ -3,7 +3,7 @@ import axios from "axios"
 const showArtists = async(name:string) => {
     async function searchArtist(query: string) {
         const BASE_URL = 'https://musicbrainz.org/ws/2';
-        const Endpoint = `${BASE_URL}/artist/?query=${encodeURIComponent(query)}&fmt=json`;
+        const Endpoint = `${BASE_URL}/artist/?query=${encodeURIComponent(query)}&fmt=json&limit=4`;
 
         try {
         const response = await axios.get(Endpoint);

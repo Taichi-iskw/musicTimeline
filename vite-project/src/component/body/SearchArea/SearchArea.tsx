@@ -6,7 +6,7 @@ import SuggestArtist from "./SuggestArtists";
 import {ArtistInfo} from "./SuggestArtists";
 
 const StyledInput = styled.input`
-    margin: 1vh 2vh;
+    margin: 2vh 2vh;
 `
 const StyledDivBorderBottom = styled.div`
     border-bottom:black solid 0.3vh;
