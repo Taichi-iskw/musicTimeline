@@ -1,8 +1,10 @@
+import Header from "./component/header/header"
+
 function App() {
 
   return (
     <>
-      First
+      <Header />
     </>
   )
 }
