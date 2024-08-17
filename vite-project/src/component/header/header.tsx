@@ -1,19 +1,15 @@
 import styled from "styled-components";
 
-interface StyledH2Props {
-    isColorBlack?: boolean;
-}
-
-const StyledH2 = styled.h2<StyledH2Props>`
-    color: red;
+const StyledH1 = styled.h1`
+    border-bottom: black solid;
 `;
 
 const Header = () => {
     return (
         <header>
-            <StyledH2>
+            <StyledH1>
                 Music Timeline
-            </StyledH2>
+            </StyledH1>
         </header>
     );
 };
