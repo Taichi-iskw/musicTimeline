@@ -18,7 +18,6 @@ const S_span = styled.span`
 `
 
 const SuggestArtist: React.FC<SuggestArtistProps> = ({ artistInfo,index }) => {
-    console.log(`Name: 「${artistInfo.name}」 ID: ${artistInfo.id}`)
     return (
         <S_span>{index+1}. {artistInfo.name}</S_span>
     );

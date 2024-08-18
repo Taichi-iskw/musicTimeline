@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
+
+import Years from "./AlbumInfos/years"
+import Albums from './AlbumInfos/Albums';
 
 interface AlbumTimeLineProps {
     id: string;
@@ -28,6 +32,21 @@ const getAlbumsById = async (artistId: string) => {
     }
 };
 
+const S_Div = styled.div`
+    margin: 2vh 0;
+    border: 0.1px gray solid;
+    max-width:50%;
+    /* width:1vh; */
+    
+    display:flex;
+    gap:1vh;
+    flex: 1;
+
+    & >div:first-child{
+        display: flex;
+        justify-content: end;
+    }
+`;
 
 const AlbumTimeLine: React.FC<AlbumTimeLineProps> = ({ id }) => {
     const [AlbumInfos, setAlbumInfos] = useState<albumInfoProps[]>();
@@ -46,11 +65,20 @@ const AlbumTimeLine: React.FC<AlbumTimeLineProps> = ({ id }) => {
     if (loading) return <div>Loading...</div>;
     if (!AlbumInfos) return <div>No artist data available</div>;
 
-    console.log(AlbumInfos)
     return (
         <ul>
+            <div>The Beatles</div>
             {AlbumInfos.map((albumInfo:albumInfoProps)=>{
-                return <li key={albumInfo["id"]}>{albumInfo["date"]}: {albumInfo["title"]}</li>
+                return(
+                    <S_Div key={albumInfo["id"]}>
+                        <div>
+                            <Years date={albumInfo["date"] || ''} />
+                        </div>
+                        <div>
+                            <Albums title={albumInfo["title"]} id={albumInfo["id"]} />
+                        </div>
+                    </S_Div>
+                )
             })}
         </ul>
     );
