@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Years from "./years"
-import AlbumTimeLine from "./AlubumTimeLine"
+import AlbumTimeLine from "./AlbumTimeLine"
 
 const StyledContaienr = styled.div`
     display: flex;
