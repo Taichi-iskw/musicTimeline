@@ -10,34 +10,57 @@ interface AlbumImageProps{
 
 const AlbumImage:React.FC<AlbumImageProps> =({id})=>{
     // const [albumData, setAlbumData] = useState()
+    console.log(id)
 
-    const getAlbumInfo = async (id: string) => {
-        const url = `https://musicbrainz.org/ws/2/release-group/${id}`
-        // const url = `https://musicbrainz.org/ws/2/release/${id}?inc=recordings&fmt=json`;
-        console.log(id)
-        try{
-            const response = await axios.get(url);
-            return response;
-        }catch(e){
-            console.log(e)
+    // const getAlbumInfo = async (id: string) => {
+    //     // const url = `https://musicbrainz.org/ws/2/release-group/${id}`
+    //     // const url = `https://musicbrainz.org/ws/2/release/${id}?inc=recordings&fmt=json`;
+    //     const url = `https://musicbrainz.org/ws/2/release/d6010be3-98f8-422c-a6c9-787e2e491e58`
+    //     console.log(id)
+    //     try{
+    //         const response = await axios.get(url);
+    //         return response;
+    //     }catch(e){
+    //         console.log(e)
+    //     }
+    // };
+    // async function get(){
+    //     // const Boo = true
+    //     // const Test = "9162580e-5df4-32de-80cc-f45a8d8a9b1d"
+    //     // const testId = Boo?Test:id;
+
+    //     // const response = await getAlbumInfo(testId);
+    //     // console.log(response)
+    //     // // setAlbumData(response)
+    //     // // 叩くAPIが間違ってそう。
+    //     // // 必要なデータ[収録曲, アルバム画像]
+    // }
+    // get()
+
+    const getAlbumTracks = async (releaseId: string) => {
+        const Endpoint = `https://musicbrainz.org/ws/2/release/${releaseId}?inc=recordings&fmt=json`;
+    
+        try {
+            const response = await axios.get(Endpoint);
+            const tracks = response.data['media'][0]['tracks'].map((track: { title: string, length: number }) => {
+                return {
+                    title: track.title,
+                    length: track.length,
+                };
+            });
+            return tracks;
+        } catch (error) {
+            console.error('Error fetching album tracks:', error);
+            return null;
         }
     };
-    async function get(){
-        const Boo = true
-        const Test = "9162580e-5df4-32de-80cc-f45a8d8a9b1d"
-        const testId = Boo?Test:id;
-
-        const response = await getAlbumInfo(testId);
-        console.log(response)
-        // setAlbumData(response)
-        // 叩くAPIが間違ってそう。
-        // 必要なデータ[収録曲, アルバム画像]
-
-
-
-
-    }
-    get()
+    
+    // Example usage
+    const releaseId = '1b022e01-4da6-387b-a6ef-30eae1ebc2e3'; // Abbey RoadのリリースID
+    getAlbumTracks(releaseId).then(tracks => {
+        console.log(tracks);
+    });
+    
 
     return(
         <div>Here Album Image</div>
