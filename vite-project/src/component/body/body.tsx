@@ -1,5 +1,5 @@
-import SearchArea from "./SearchArea/SearchArea"
-import TimeLineArea from "./TimeLineArea/TimeLineArea"
+import SearchArea from "./SearchArea/mainSearch"
+import TimeLineArea from "./TimeLineArea/mainTimeLine"
 
 const Body = ()=>{
     return(
