@@ -12,6 +12,13 @@ const StyledInput = styled.input`
 const StyledDivBorderBottom = styled.div`
     border-bottom:black solid 0.3vh;
 `
+
+const S_Div = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+`
+
 const searchArtistByEnterKey = async(e:{key:string,code:string},name:string,setSugestedArtists:(artists:ArtistInfo[])=>void)=>{
     if(e.key ==="Enter" || e.code ==="Enter"){
         const artistInfo = await searchArtist(name)
@@ -32,7 +39,11 @@ const InputArtistNameArea = ()=>{
         >
         </StyledInput>
         <ArtistSearchBtn InputValue={InputVal} setSugestedArtists={setSugestedArtists}/>
-        {SuggestedArtists.map((artistsInfo,index) => <SuggestArtist key={artistsInfo.id} artistInfo={artistsInfo} index={index}/>)}
+        <S_Div>
+            {SuggestedArtists.map((artistsInfo) => 
+                (<SuggestArtist key={artistsInfo.id} artistInfo={artistsInfo}/>)
+            )}
+        </S_Div>
     </StyledDivBorderBottom >
     )
 }

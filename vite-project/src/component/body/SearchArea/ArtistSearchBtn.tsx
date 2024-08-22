@@ -15,13 +15,12 @@ export async function searchArtist(name: string) {
             params:{
                 q: name,
                 type: 'artist',
-                limit:4
+                limit:8
             },
             headers:{
                 Authorization:`Bearer ${token}`
             }
         });
-        console.log('=====================================================================')
         const artistInfo = res.data.artists.items.map((item: { name: string; id: string; images: { url: string }[] }) => {
             const noImageURL = 'https://placehold.jp/300x300.png?text=No+Image';
             const image = item.images[0] ? item.images[0] : { url: noImageURL };
