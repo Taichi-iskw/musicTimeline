@@ -1,49 +1,52 @@
 import axios from "axios"
+// import noImage from "./noImage.png"
 
-const showArtists = async(name:string) => {
-    async function searchArtist(query: string) {
-        const token = import.meta.env.VITE_SPOTIFY_TOKEN
-        const BASE_URL = 'https://api.spotify.com/v1/search'
-        
-        try {
-            const res = await axios.get(BASE_URL,{
-                params:{
-                    q: name,
-                    type: 'artist',
-                    limit:4
-                },
-                headers:{
-                    Authorization:`Bearer ${token}`
-                }
-            });
-            const artistInfo = res.data.artists.items.map((item:{name:string,id:string})=>{
-                return{name:item.name,id:item.id}
-            })
-            console.log(artistInfo)
-            return artistInfo
-        } catch (error) {
-            console.error('Error fetching artist data:', error,query);
+interface Image{
+    url:string
+}
+
+export async function searchArtist(name: string) {
+    const token = import.meta.env.VITE_SPOTIFY_TOKEN
+    const BASE_URL = 'https://api.spotify.com/v1/search'
+    if(!name) name = 'The Beatles'
+
+    try {
+        const res = await axios.get(BASE_URL,{
+            params:{
+                q: name,
+                type: 'artist',
+                limit:4
+            },
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        });
+        console.log('=====================================================================')
+        const artistInfo = res.data.artists.items.map((item: { name: string; id: string; images: { url: string }[] }) => {
+            const noImageURL = 'https://placehold.jp/300x300.png?text=No+Image';
+            const image = item.images[0] ? item.images[0] : { url: noImageURL };
+            return {
+                name: item.name,
+                id: item.id,
+                image: image
+            };
+        });
+        return artistInfo
+    } catch (error) {
+        console.log(error)
         return null;
-        }
     }
-
-    const sugestedArtists = await searchArtist(name)
-    const sugestedAritstsInfo = sugestedArtists.map((artist: {id:string, name:string})=>{
-        const {id, name} = artist;
-        return{id:id, name:name}
-    })
-    return sugestedAritstsInfo
 }
 
 interface ArtistSearchBtnProps {
     InputValue: string;
-    setSugestedArtists:(ArtistsInfo:[{id:string, name:string}])=>void;
+    setSugestedArtists:(ArtistsInfo:[{id:string, name:string, image:Image}])=>void;
 }
 
 const ArtistSearchBtn: React.FC<ArtistSearchBtnProps> = ({ InputValue, setSugestedArtists}) => {
     return (
         <button onClick={async() => {
-            const ArtistsInfo = await showArtists(InputValue)
+            const ArtistsInfo = await searchArtist(InputValue)
             setSugestedArtists(ArtistsInfo)
         }}>search</button>
     );

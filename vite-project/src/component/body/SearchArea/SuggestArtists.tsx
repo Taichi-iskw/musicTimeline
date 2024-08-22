@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import ImageComponent from "./ImageComponent";
 
 export interface ArtistInfo {
     name: string;
     id: string;
+    image:{
+        url:string
+    }
 }
 
 interface SuggestArtistProps {
@@ -19,7 +23,7 @@ const S_span = styled.span`
 
 const SuggestArtist: React.FC<SuggestArtistProps> = ({ artistInfo,index }) => {
     return (
-        <S_span>{index+1}. {artistInfo.name}</S_span>
+        <S_span>{index+1}. <ImageComponent image={artistInfo.image}/>{artistInfo.name}</S_span>
     );
 }
 
