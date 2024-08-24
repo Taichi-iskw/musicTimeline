@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ImageComponent from './ImageComponent';
+import { useArtistId } from '../../ArtistIdContext';
 
 export interface ArtistInfo {
     name: string;
@@ -36,13 +37,15 @@ const S_span = styled.span`
     }
 `;
 
-const clicked = (name: string) => {
-    console.log(name);
-};
-
 const SuggestArtist: React.FC<SuggestArtistProps> = ({ artistInfo }) => {
+    const { dispatch } = useArtistId();
+
+    const clicked = (id: string) => {
+        dispatch({ type: 'ADD_ARTIST_ID', payload: id });
+    };
+
     return (
-        <S_span onClick={() => clicked(artistInfo.name)}>
+        <S_span onClick={() => clicked(artistInfo.id)}>
             <ImageComponent image={artistInfo.image} />
             <span>{artistInfo.name}</span>
         </S_span>
