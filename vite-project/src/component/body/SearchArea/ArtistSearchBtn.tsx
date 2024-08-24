@@ -1,4 +1,4 @@
-import searchArtist from './Func_searchArtist';
+import searchArtist from './suggestedArtist/Func_searchArtist';
 
 interface Image {
     url: string;

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import ArtistSearchBtn from './ArtistSearchBtn';
-import searchArtist from './Func_searchArtist';
-import SuggestArtist, { ArtistInfo } from './SuggestArtists';
+import searchArtist from './suggestedArtist/Func_searchArtist';
+import SuggestArtist, { ArtistInfo } from './suggestedArtist/SuggestArtists';
 
 const S = {
     Input: styled.input`
@@ -35,7 +35,7 @@ const searchArtistByEnterKey = async (
 };
 
 const InputArtistNameArea = () => {
-    const [InputVal, setInput] = useState('');
+    const [InputVal, setInput] = useState('The Beatles');
     const [SuggestedArtists, setSugestedArtists] = useState<ArtistInfo[]>([]);
 
     return (
@@ -44,6 +44,7 @@ const InputArtistNameArea = () => {
             <S.Input
                 type='text'
                 id='NameInput'
+                value={InputVal}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
                     searchArtistByEnterKey(e, InputVal, setSugestedArtists);

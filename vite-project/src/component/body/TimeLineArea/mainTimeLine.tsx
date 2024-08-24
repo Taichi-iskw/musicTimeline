@@ -1,18 +1,17 @@
-import styled from "styled-components"
-import AlbumTimeLine from "./AlbumTimeLine"
+import styled from 'styled-components';
+import AlbumTimeLine from './AlbumTimeLine';
 
 const StyledContaienr = styled.div`
     display: flex;
     height: 100vh;
-`
-const TheBeatlesId:string = "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d"
+`;
 
-const TimeLineArea =()=>{
-    return(
-    <StyledContaienr>
-        <AlbumTimeLine id={TheBeatlesId}></AlbumTimeLine>
-    </StyledContaienr>
-    )
-}
+const TimeLineArea = () => {
+    return (
+        <StyledContaienr>
+            <AlbumTimeLine />
+        </StyledContaienr>
+    );
+};
 
-export default TimeLineArea
+export default TimeLineArea;

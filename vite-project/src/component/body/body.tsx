@@ -1,13 +1,15 @@
-import SearchArea from "./SearchArea/mainSearch"
-import TimeLineArea from "./TimeLineArea/mainTimeLine"
+import SearchArea from './SearchArea/mainSearch';
+import TimeLineArea from './TimeLineArea/mainTimeLine';
 
-const Body = ()=>{
-    return(
+// ここでartistのidをグローバル的に宣言するべきか
+
+const Body = () => {
+    return (
         <>
-            <SearchArea/>
-            <TimeLineArea/>
+            <SearchArea />
+            <TimeLineArea />
         </>
-    )
-}
+    );
+};
 
-export default Body
+export default Body;

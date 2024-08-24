@@ -30,10 +30,19 @@ const S_span = styled.span`
         overflow-x: auto;
         white-space: nowrap;
     }
+
+    &:hover {
+        background-color: lightgray;
+    }
 `;
+
+const clicked = (name: string) => {
+    console.log(name);
+};
+
 const SuggestArtist: React.FC<SuggestArtistProps> = ({ artistInfo }) => {
     return (
-        <S_span>
+        <S_span onClick={() => clicked(artistInfo.name)}>
             <ImageComponent image={artistInfo.image} />
             <span>{artistInfo.name}</span>
         </S_span>
