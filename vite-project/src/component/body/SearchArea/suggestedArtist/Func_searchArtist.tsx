@@ -2,12 +2,13 @@ import axios from 'axios';
 
 const searchArtist = async (name: string) => {
     const token = import.meta.env.VITE_SPOTIFY_TOKEN;
-    const BASE_URL = 'https://api.spotify.com/v1/search';
+    const END_POINT = import.meta.env.VITE_SPOTIFY_BASE_URL + 'search';
+
     const QueryArtistNumber = 4;
     if (!name) name = 'the beatles'; /** 例外処理未実装 */
 
     try {
-        const res = await axios.get(BASE_URL, {
+        const res = await axios.get(END_POINT, {
             params: {
                 q: name,
                 type: 'artist',

@@ -3,7 +3,7 @@ import AlbumTimeLine from './AlbumTimeLine';
 
 const StyledContaienr = styled.div`
     display: flex;
-    height: 100vh;
+    /* height: 100vh; */
 `;
 
 const TimeLineArea = () => {
