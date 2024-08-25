@@ -30,7 +30,34 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({ id }) => {
                     },
                 });
                 console.log(res.data.items);
-                setAlbums(res.data.items);
+                ////////////////////
+                const albums = res.data.items;
+                const revAlbums = albums.reverse();
+                const uniqueAlbumNames: Set<string> = new Set();
+
+                const uniqueAlbums = revAlbums.filter((album) => {
+                    const albumName = album.name;
+                    let mainName = albumName;
+
+                    if (albumName.includes('(')) {
+                        mainName = albumName.split('(')[0].trim();
+                    } else if (albumName.includes('-')) {
+                        mainName = albumName.split('-')[0].trim();
+                    }
+
+                    const isUnique = !uniqueAlbumNames.has(mainName);
+                    if (isUnique) {
+                        console.log(mainName, album.release_date);
+                        uniqueAlbumNames.add(mainName);
+                    }
+
+                    return isUnique;
+                });
+
+                console.log(uniqueAlbums);
+
+                ////////////////
+                setAlbums(uniqueAlbums);
             } catch (error) {
                 console.error('Error fetching artist albums:', error);
             }
