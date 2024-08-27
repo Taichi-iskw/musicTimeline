@@ -50,8 +50,26 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({ id }) => {
                 const sortedAlbums = allAlbums.sort((a, b) =>
                     new Date(a.release_date) > new Date(b.release_date) ? 1 : -1,
                 );
+                const uniqueAlbumNames: Set<string> = new Set();
+                const uniqueAlbums = sortedAlbums.filter((album) => {
+                    const albumName = album.name;
+                    let mainName = albumName;
 
-                setAlbums(sortedAlbums);
+                    if (albumName.includes('(')) {
+                        mainName = albumName.split('(')[0].trim();
+                    } else if (albumName.includes('-')) {
+                        mainName = albumName.split('-')[0].trim();
+                    }
+
+                    const isUnique = !uniqueAlbumNames.has(mainName);
+                    if (isUnique) {
+                        uniqueAlbumNames.add(mainName);
+                    }
+
+                    return isUnique;
+                });
+
+                setAlbums(uniqueAlbums);
             } catch (error) {
                 console.error('Error fetching artist albums:', error);
             }
