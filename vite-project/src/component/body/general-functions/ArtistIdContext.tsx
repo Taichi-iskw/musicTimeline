@@ -1,22 +1,27 @@
 import { createContext, useReducer, ReactNode, useContext } from 'react';
 
 type Action =
-    | { type: 'ADD_ARTIST_ID'; payload: string }
-    | { type: 'REMOVE_ARTIST_ID'; payload: string }
-    | { type: 'CLEAR_ARTIST_IDS' };
+    | { type: 'ADD_ARTIST'; payload: { id: string; name: string } }
+    | { type: 'REMOVE_ARTIST'; payload: string }
+    | { type: 'CLEAR_ARTISTS' };
 
-type State = string[];
+type Artist = {
+    id: string;
+    name: string;
+};
+
+type State = Artist[];
 
 const initialState: State = [];
 
 const artistIdReducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case 'ADD_ARTIST_ID':
-            if (state.includes(action.payload)) return [...state];
-            return [...state, action.payload];
-        case 'REMOVE_ARTIST_ID':
-            return state.filter((id) => id !== action.payload);
-        case 'CLEAR_ARTIST_IDS':
+        case 'ADD_ARTIST':
+            if (state.find((artist) => artist.id === action.payload.id)) return [...state];
+            return [...state, { id: action.payload.id, name: action.payload.name }];
+        case 'REMOVE_ARTIST':
+            return state.filter((artist) => artist.id !== action.payload);
+        case 'CLEAR_ARTISTS':
             return [];
         default:
             return state;

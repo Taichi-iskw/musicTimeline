@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ImageComponent from '../../SearchArea/suggestedArtist/ImageComponent';
+import ImageComponent from '../../general-functions/ImageComponent';
 
 interface ArtistWorksProps {
     id: string;
+    name: string;
 }
 
 interface AlbumInfo {
@@ -14,7 +15,7 @@ interface AlbumInfo {
     images: { url: string }[];
 }
 
-const ArtistWorks: React.FC<ArtistWorksProps> = ({ id }) => {
+const ArtistWorks: React.FC<ArtistWorksProps> = ({ id, name }) => {
     const [albums, setAlbums] = useState<AlbumInfo[]>([]);
 
     useEffect(() => {
@@ -43,18 +44,21 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({ id }) => {
                     const albums = res.data.items;
                     totalAlbums = res.data.total;
                     allAlbums = allAlbums.concat(albums);
-                    offset += 50; // 次のページへ
+                    offset += 50;
                 } while (offset < totalAlbums);
 
-                // 時系列順にソート
+                // sort by release date
                 const sortedAlbums = allAlbums.sort((a, b) =>
                     new Date(a.release_date) > new Date(b.release_date) ? 1 : -1,
                 );
+
+                // remove duplicates name as possible
                 const uniqueAlbumNames: Set<string> = new Set();
                 const uniqueAlbums = sortedAlbums.filter((album) => {
                     const albumName = album.name;
                     let mainName = albumName;
 
+                    // ex. title(remaster), title-remaster
                     if (albumName.includes('(')) {
                         mainName = albumName.split('(')[0].trim();
                     } else if (albumName.includes('-')) {
@@ -80,7 +84,7 @@ const ArtistWorks: React.FC<ArtistWorksProps> = ({ id }) => {
 
     return (
         <div>
-            <h2>Artist ID: {id}</h2>
+            <h2>{name}</h2>
             <ul>
                 {albums.map((album) => (
                     <li key={album.id}>
