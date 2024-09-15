@@ -15,18 +15,15 @@ interface TableObj {
 }
 
 interface TableProps {
-    allAlbums: TableObj;
+    tableBody: TableObj;
     artists: { id: string; name: string }[];
 }
 
-const Table: React.FC<TableProps> = ({ allAlbums, artists }) => {
-    console.log('allAlbums');
-    console.log(allAlbums);
-    console.log(artists);
+const Table: React.FC<TableProps> = ({ tableBody, artists }) => {
     return (
         <table>
             <TableHead artistNames={artists.map((artist) => artist.name)} />
-            <TableBody allAlbums={allAlbums} />
+            <TableBody tableBody={tableBody} />
         </table>
     );
 };

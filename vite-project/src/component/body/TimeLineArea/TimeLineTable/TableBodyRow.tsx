@@ -1,33 +1,12 @@
-interface timesObj {
-    [artistName: string]: number;
-}
-
-const TableBodyRow: React.FC<{ year: string; albums: any }> = ({ year, albums }) => {
-    const yearArr: any = [];
-    yearArr[0] = [year];
-
-    const timesObj: timesObj = {};
-    albums.map((album: any) => {
-        const name = album['artists'][0]['name'];
-
-        if (!timesObj[name]) timesObj[name] = 0;
-        if (!yearArr[timesObj[name]]) yearArr[timesObj[name]] = ['']; // td year
-
-        yearArr[timesObj[name]].push(album['name']); //TODO: should not push
-        timesObj[name] += 1;
-    });
-    console.log('yearArr');
-    console.log(yearArr);
-    console.log('timesObj');
-    console.log(timesObj);
-
+const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
+    console.log(yearData);
     return (
         <>
-            {yearArr.map((tableRow: []) => {
+            {yearData.map((rowData: any, index: number) => {
                 return (
-                    <tr>
-                        {tableRow.map((tableData: string) => {
-                            return <td>{tableData}</td>;
+                    <tr key={index}>
+                        {rowData.map((data: string, index: number) => {
+                            return <td key={index}>{data}</td>;
                         })}
                     </tr>
                 );

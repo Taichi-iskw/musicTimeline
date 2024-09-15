@@ -1,10 +1,10 @@
 import TableBodyRow from './TableBodyRow';
 
-const TableBody: React.FC<{ allAlbums: any }> = ({ allAlbums }) => {
+const TableBody: React.FC<{ tableBody: any }> = ({ tableBody }) => {
     return (
         <tbody>
-            {Object.keys(allAlbums).map((year) => {
-                return <TableBodyRow year={year} albums={allAlbums[year]} />;
+            {tableBody.map((yearData: any, index: number) => {
+                return <TableBodyRow key={index} yearData={yearData} />;
             })}
         </tbody>
     );
