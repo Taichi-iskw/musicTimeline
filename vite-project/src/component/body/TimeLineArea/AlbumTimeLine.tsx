@@ -1,24 +1,47 @@
+import { useState, useEffect } from 'react';
 import { useArtistId } from '../general-functions/ArtistIdContext';
-import styled from 'styled-components';
+import { getAllAlbums } from '../general-functions/getAllAlbums';
+import Table from './TimeLineTable/Table';
 
-import ArtistWorks from './AlbumInfos/ArtistWorks';
-
-const S_div = styled.div`
-    margin: 0 5px;
-`;
+interface AlbumInfo {
+    id: string;
+    name: string;
+    release_date: string;
+    images: { url: string }[];
+}
+interface TableObj {
+    [year: string]: AlbumInfo[];
+}
 
 const AlbumTimeLine: React.FC = () => {
     const { state } = useArtistId();
+    const [allAlbums, setAllAlbums] = useState<TableObj>({});
 
-    return (
-        <>
-            {state.map(({ id, name }) => (
-                <S_div key={id}>
-                    <ArtistWorks id={id} name={name} />
-                </S_div>
-            ))}
-        </>
-    );
+    useEffect(() => {
+        const fetchAlbums = async () => {
+            const allArtistAlbums = await Promise.all(
+                state.map(async ({ id }) => {
+                    return await getAllAlbums(id);
+                }),
+            );
+            const tableObj: TableObj = {};
+
+            allArtistAlbums.map((artistAlbums) => {
+                artistAlbums.forEach((album) => {
+                    const date = album.release_date.slice(0, 4);
+                    if (!tableObj[date]) {
+                        tableObj[date] = [];
+                    }
+                    tableObj[date].push(album);
+                });
+            });
+            setAllAlbums(tableObj);
+        };
+
+        fetchAlbums();
+    }, [state]);
+
+    return <Table allAlbums={allAlbums} artists={state} />;
 };
 
 export default AlbumTimeLine;
