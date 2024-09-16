@@ -9,6 +9,9 @@ const S = {
     Input: styled.input`
         margin: 1vh 1vh;
         border: solid black 1px;
+        height: 2vh;
+        font-size: large;
+        font-family: serif;
     `,
     DivBorder: styled.div`
         border-bottom: black solid 0.3vh;

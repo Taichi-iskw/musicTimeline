@@ -1,7 +1,6 @@
 import TableHead from './TableHead';
 import TableBody from './TableBody';
-
-import React from 'react';
+import styles from './Table.module.css';
 
 interface AlbumInfo {
     id: string;
@@ -21,7 +20,7 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ tableBody, artists }) => {
     return (
-        <table>
+        <table className={styles.albumTable}>
             <TableHead artistNames={artists.map((artist) => artist.name)} />
             <TableBody tableBody={tableBody} />
         </table>

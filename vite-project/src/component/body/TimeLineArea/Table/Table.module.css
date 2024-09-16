@@ -1,0 +1,33 @@
+.albumTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.albumTable th,
+.albumTable td {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 8px;
+}
+
+.albumTable th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.albumTable img {
+    display: block;
+    margin: 0 auto;
+}
+.albumTable th:first-child,
+.albumTable td:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.albumTable .borderTop td {
+    border-top: 1px solid #ddd;
+}
+.albumTable .borderBottom td {
+    border-bottom: 1px solid #ddd;
+}
