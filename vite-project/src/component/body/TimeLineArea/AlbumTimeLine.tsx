@@ -1,26 +1,35 @@
 import { useState, useEffect } from 'react';
 import { useArtistId } from '../general-functions/ArtistIdContext';
 import { getAllAlbums } from '../general-functions/getAllAlbums';
-import { processAlbumsData } from '../general-functions/processAlbumsData';
-import Table from './TimeLineTable/Table';
+import { formatDataForTable } from '../general-functions/formatDataForTable';
+import Table from './Table/Table';
 
-interface TableArr {
+interface TableObj {
     [year: string]: any;
 }
 
 const AlbumTimeLine: React.FC = () => {
     const { state } = useArtistId();
-    const [tableBody, setTableBody] = useState<TableArr>([]);
+    const [tableBody, setTableBody] = useState<TableObj>([]);
+    const [albumCache, setAlbumCache] = useState<any>({});
 
     useEffect(() => {
+        console.log('state changed');
         const fetchAlbums = async () => {
+            const newAlbumCache = { ...albumCache };
+
             const allArtistAlbums: any = await Promise.all(
-                state.map(async ({ id }) => {
-                    return await getAllAlbums(id);
+                state.map(async ({ id, name }) => {
+                    if (!newAlbumCache[id]) {
+                        console.log('fetching new album', name, id);
+                        newAlbumCache[id] = await getAllAlbums(id);
+                    }
+                    return newAlbumCache[id];
                 }),
             );
+            setAlbumCache(newAlbumCache);
 
-            const timeLineBody = processAlbumsData(allArtistAlbums, state);
+            const timeLineBody = formatDataForTable(allArtistAlbums, state);
 
             setTableBody(timeLineBody);
         };

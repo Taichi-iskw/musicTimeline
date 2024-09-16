@@ -14,7 +14,7 @@ interface cntObj {
     [name: string]: number;
 }
 
-export const processAlbumsData = (
+export const formatDataForTable = (
     allArtistAlbums: AlbumInfo[][],
     state: { id: string; name: string }[],
 ) => {

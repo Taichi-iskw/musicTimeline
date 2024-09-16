@@ -39,7 +39,7 @@ export const getAllAlbums = async (id: string) => {
         const sortedAlbums = allAlbums.sort((a, b) =>
             new Date(a.release_date) > new Date(b.release_date) ? 1 : -1,
         );
-
+        console.log('sortedAlbums', sortedAlbums);
         // remove duplicates name as possible
         const uniqueAlbumNames: Set<string> = new Set();
         const uniqueAlbums = sortedAlbums.filter((album) => {

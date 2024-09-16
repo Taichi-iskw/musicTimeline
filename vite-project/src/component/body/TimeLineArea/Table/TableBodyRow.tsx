@@ -1,5 +1,5 @@
 const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
-    console.log(yearData);
+    // console.log(yearData);
     return (
         <>
             {yearData.map((rowData: any, index: number) => {
