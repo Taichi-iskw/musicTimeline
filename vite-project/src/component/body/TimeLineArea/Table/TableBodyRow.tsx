@@ -1,4 +1,5 @@
 import styles from './Table.module.css';
+import ImageComponent from '../../general-functions/ImageComponent';
 
 const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
     return (
@@ -14,8 +15,18 @@ const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
                             ${isLastRow ? styles.borderBottom : ''}
                         `}
                     >
-                        {rowData.map((data: string, index: number) => {
-                            return <td key={index}>{data}</td>;
+                        {rowData.map((data, dataIndex) => {
+                            if (typeof data === 'string') {
+                                return <td key={dataIndex}>{data}</td>;
+                            }
+                            return (
+                                <td key={dataIndex}>
+                                    <div className={styles.albumInfo}>
+                                        <div>{data.name}</div>
+                                        <ImageComponent image={data.images[0]} size={'120'} />
+                                    </div>
+                                </td>
+                            );
                         })}
                     </tr>
                 );

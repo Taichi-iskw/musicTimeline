@@ -28,8 +28,10 @@ const AlbumTimeLine: React.FC = () => {
                 }),
             );
             setAlbumCache(newAlbumCache);
+            console.log('allArtistAlbums', allArtistAlbums);
 
             const timeLineBody = formatDataForTable(allArtistAlbums, state);
+            console.log('timeLineBody', timeLineBody);
 
             setTableBody(timeLineBody);
         };

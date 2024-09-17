@@ -3,7 +3,7 @@ interface AlbumInfo {
     name: string;
     release_date: string;
     images: { url: string }[];
-    artists: { name: string }[];
+    artists: { id: string }[];
 }
 
 interface TableObj {
@@ -30,7 +30,7 @@ export const formatDataForTable = (
         });
     });
 
-    const artistsArr = state.map(({ name }) => name);
+    const artistsArr = state.map(({ id }) => id);
 
     const timeLineBody = Object.keys(tableObj).map((year) => {
         const albums = tableObj[year];
@@ -38,14 +38,14 @@ export const formatDataForTable = (
         const cntObj: cntObj = {};
 
         albums.forEach((album) => {
-            const name = album.artists[0].name;
+            const id = album.artists[0].id;
 
-            if (!cntObj[name]) cntObj[name] = 0;
-            if (!yearArr[cntObj[name]])
-                yearArr[cntObj[name]] = Array.from({ length: state.length + 1 }, () => ''); // td year
+            if (!cntObj[id]) cntObj[id] = 0;
+            if (!yearArr[cntObj[id]])
+                yearArr[cntObj[id]] = Array.from({ length: state.length + 1 }, () => ''); // td year
 
-            yearArr[cntObj[name]][artistsArr.indexOf(name) + 1] = album.name; //TODO: 本来ならここでアルバムデータ
-            cntObj[name] += 1;
+            yearArr[cntObj[id]][artistsArr.indexOf(id) + 1] = album; //TODO: 本来ならここでアルバムデータ
+            cntObj[id] += 1;
         });
         yearArr[0][0] = year;
         return yearArr;

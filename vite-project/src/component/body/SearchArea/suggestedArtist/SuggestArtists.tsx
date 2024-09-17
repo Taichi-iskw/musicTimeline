@@ -46,7 +46,7 @@ const SuggestArtist: React.FC<SuggestArtistProps> = ({ artistInfo }) => {
 
     return (
         <S_span onClick={() => clicked(artistInfo.id, artistInfo.name)}>
-            <ImageComponent image={artistInfo.image} />
+            <ImageComponent image={artistInfo.image} size={'80'} />
             <span>{artistInfo.name}</span>
         </S_span>
     );

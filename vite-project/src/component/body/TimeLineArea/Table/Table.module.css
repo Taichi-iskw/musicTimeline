@@ -8,6 +8,7 @@
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     padding: 8px;
+    max-width: 25vh;
 }
 
 .albumTable th {
@@ -15,14 +16,10 @@
     text-align: left;
 }
 
-.albumTable img {
-    display: block;
-    margin: 0 auto;
-}
 .albumTable th:first-child,
 .albumTable td:first-child {
-    width: 80px;
     text-align: center;
+    width: 80px;
 }
 
 .albumTable .borderTop td {
@@ -30,4 +27,11 @@
 }
 .albumTable .borderBottom td {
     border-bottom: 1px solid #ddd;
+}
+
+.albumInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: auto;
 }
