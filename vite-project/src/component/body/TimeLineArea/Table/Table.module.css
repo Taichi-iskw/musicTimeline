@@ -1,19 +1,24 @@
 .albumTable {
     width: 100%;
     border-collapse: collapse;
+    font-family: 'Arial', sans-serif; /* フォントを変更 */
+    background-color: #f9f9f9; /* テーブル全体の背景色を変更 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* テーブルに影を追加 */
+    border-radius: 8px; /* 角を丸くする */
+    overflow: hidden; /* 角丸の効果を適用 */
 }
 
 .albumTable th,
 .albumTable td {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px; /* パディングを増やして余白を広げる */
     max-width: 25vh;
+    text-align: center; /* テキストを中央揃えにする */
 }
 
 .albumTable th {
-    background-color: #f2f2f2;
-    text-align: left;
+    border-bottom: 2px solid #333;
 }
 
 .albumTable th:first-child,
@@ -25,6 +30,7 @@
 .albumTable .borderTop td {
     border-top: 1px solid #ddd;
 }
+
 .albumTable .borderBottom td {
     border-bottom: 1px solid #ddd;
 }
@@ -33,5 +39,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: auto;
+    font-size: 14px; /* フォントサイズを固定 */
+    color: #333; /* テキスト色を変更 */
+}
+
+.albumInfo img {
+    margin-bottom: 8px; /* 画像とテキストの間に余白を追加 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 画像に影を追加 */
+}
+
+.albumTable tr:nth-child(even) {
+    background-color: #f2f2f2; /* 偶数行の背景色を変更 */
+}
+
+.albumTable td:hover {
+    background-color: #e0e0e0; /* ホバー時の背景色を変更 */
+    transition: background-color 0.3s; /* ホバー時の背景色変更にアニメーションを追加 */
 }

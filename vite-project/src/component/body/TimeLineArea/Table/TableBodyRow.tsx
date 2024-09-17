@@ -7,6 +7,7 @@ const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
             {yearData.map((rowData: any, index: number) => {
                 const isFirstRow = index === 0;
                 const isLastRow = index === yearData.length - 1;
+
                 return (
                     <tr
                         key={index}
