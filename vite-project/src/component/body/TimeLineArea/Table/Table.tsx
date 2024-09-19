@@ -21,7 +21,7 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ tableBody, artists }) => {
     return (
         <table className={styles.albumTable}>
-            <TableHead artistNames={artists.map((artist) => artist.name)} />
+            <TableHead artists={artists} />
             <TableBody tableBody={tableBody} />
         </table>
     );
