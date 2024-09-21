@@ -16,7 +16,7 @@ const TableBodyRow: React.FC<{ yearData: any }> = ({ yearData }) => {
                             ${isLastRow ? styles.borderBottom : ''}
                         `}
                     >
-                        {rowData.map((data, dataIndex) => {
+                        {rowData.map((data: any, dataIndex: number) => {
                             if (typeof data === 'string') {
                                 return <td key={dataIndex}>{data}</td>;
                             }

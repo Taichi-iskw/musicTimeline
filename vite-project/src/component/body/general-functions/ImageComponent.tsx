@@ -6,6 +6,7 @@ type ImageProps = {
 };
 
 const ImageComponent: React.FC<ImageProps> = ({ image, size }) => {
+    console.log(size);
     return <img src={image.url} alt='Artist Image' width={size} height={size} />;
 };
 
