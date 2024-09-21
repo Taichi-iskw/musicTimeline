@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getToken from '../../global';
 
 interface AlbumInfo {
     id: string;
@@ -9,14 +10,14 @@ interface AlbumInfo {
 
 export const getAllAlbums = async (id: string) => {
     try {
-        const token = import.meta.env.VITE_SPOTIFY_TOKEN;
-        const BASE_URL = import.meta.env.VITE_SPOTIFY_BASE_URL;
+        const token = await getToken();
+
         let allAlbums: AlbumInfo[] = [];
         let offset = 0;
         let totalAlbums = 0;
 
         do {
-            const END_POINT = `${BASE_URL}artists/${id}/albums`;
+            const END_POINT = `https://api.spotify.com/v1/artists/${id}/albums`;
 
             const res = await axios.get(END_POINT, {
                 params: {
